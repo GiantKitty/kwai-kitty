@@ -41,6 +41,7 @@ public class LoginFilter implements Filter {
     @Override
     public void doFilter(ServletRequest req, ServletResponse resp, FilterChain filterChain)
             throws IOException, ServletException {
+        log.info("LoginFilter before !!!!");
         HttpServletResponse response = (HttpServletResponse) resp;
         HttpServletRequest request = (HttpServletRequest) req;
 
@@ -73,6 +74,7 @@ public class LoginFilter implements Filter {
         }
 
         filterChain.doFilter(request, response);
+        log.info("LoginFilter after !!!!");
     }
 
     @Override

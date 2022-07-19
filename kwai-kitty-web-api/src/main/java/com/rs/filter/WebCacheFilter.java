@@ -36,6 +36,7 @@ public class WebCacheFilter implements Filter {
         //让Web资源不缓存，很简单，设置http中response的请求头即可了！
         //我们使用的是http协议，ServletResponse并没有能够设置请求头的方法，所以要强转成HttpServletRequest
         //一般我们写Filter都会把他俩强转成Http类型的
+        log.info("WebCacheFilter before !!!!");
         HttpServletRequest request = (HttpServletRequest) req;
         HttpServletResponse response = (HttpServletResponse) resp;
 
@@ -45,6 +46,7 @@ public class WebCacheFilter implements Filter {
 
         //放行目标资源的response已经设置成不缓存的了
         filterChain.doFilter(request, response);
+        log.info("WebCacheFilter after !!!!");
     }
 
     @Override
