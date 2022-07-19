@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.7.1</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
+
+    <!-- 父工程必须遵循：1、packaging=pom 2、没有src目录 -->
+    <groupId>com.rs</groupId>
+    <artifactId>kwai-kitty-root-pom</artifactId>
+    <version>${revision}</version>
+    <packaging>pom</packaging>
+
+    <name>${project.artifactId}</name>
+    <description>${project.name}</description>
+
+    <properties>
+        <java.version>1.8</java.version>
+        <!-- 当前工程版本号 -->
+        <revision>1.0.22-SNAPSHOT</revision>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>com.rs</groupId>
+                <artifactId>kwai-kitty-api</artifactId>
+                <version>${revision}</version>
+                <classifier>jar</classifier>
+            </dependency>
+            <dependency>
+                <groupId>com.rs</groupId>
+                <artifactId>kwai-kitty-web-api</artifactId>
+                <version>${revision}</version>
+                <classifier>jar</classifier>
+            </dependency>
+            <dependency>
+                <groupId>com.rs</groupId>
+                <artifactId>kwai-kitty-component</artifactId>
+                <version>${revision}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <profiles>
+        <profile>
+            <id>dev</id>
+            <properties>
+                <!-- 用于替换 application.yml 中的变量 -->
+                <mvn.profile.active>dev</mvn.profile.active>
+            </properties>
+            <modules>
+                <module>kwai-kitty-api</module>
+                <module>kwai-kitty-web-api</module>
+                <module>kwai-kitty-component</module>
+            </modules>
+
+        </profile>
+        <profile>
+            <id>prod</id>
+            <modules>
+                <module>kwai-kitty-api</module>
+                <module>kwai-kitty-web-api</module>
+                <module>kwai-kitty-component</module>
+            </modules>
+            <properties>
+                <!-- 用于替换 application.yml 中的变量 -->
+                <mvn.profile.active>prod</mvn.profile.active>
+            </properties>
+        </profile>
+    </profiles>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <excludes>
+                        <exclude>
+                            <groupId>org.projectlombok</groupId>
+                            <artifactId>lombok</artifactId>
+                        </exclude>
+                    </excludes>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>

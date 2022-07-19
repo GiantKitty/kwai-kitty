@@ -1,0 +1,26 @@
+logging:
+  file:
+    name: /logback.log
+  level:
+    root: info
+spring:
+  profiles:
+    active: @mvn.profile.active@
+  application:
+    name: kwai-kitty-api
+  mvc:
+    throw-exception-if-no-handler-found: true
+  jackson:
+    default-property-inclusion: non_null
+    time-zone: GMT+8
+    date-format: yyyy-MM-dd HH:mm:ss
+    serialization:
+      write_null_map_values: true
+      write_dates_as_timestamps: false
+    deserialization:
+      fail_on_unknown_properties: false
+    parser:
+      allow_single_quotes: true
+  servlet:
+    multipart:
+      max-file-size: 4MB

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.rs</groupId>
+        <artifactId>kwai-kitty-root-pom</artifactId>
+        <version>${revision}</version>
+    </parent>
+
+    <artifactId>kwai-kitty-web-api</artifactId>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.rs</groupId>
+            <artifactId>kwai-kitty-component</artifactId>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <!-- 更改打包之后的 jar name，去掉 version 信息，便于部署 -->
+        <finalName>${project.artifactId}</finalName>
+        <plugins>
+            <!-- 打包插件，下面的配置非常重要，勿改！ -->
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <mainClass>com.kwai.creator.Application</mainClass>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>
